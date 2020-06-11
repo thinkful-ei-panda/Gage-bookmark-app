@@ -1,4 +1,4 @@
-const BASE_URL = 'https://thinkful-list-api.herokuapp.com/gage';
+const BASE_URL = 'https://thinkful-list-api.herokuapp.com/gage'; // bookmark
 
 const errorCatch = function(...args){
   let error;
@@ -21,16 +21,17 @@ const errorCatch = function(...args){
 
 
 const getMarks = function(){
-
+  
 };
 
 const newMarks = function(){
 
 };
 
-const updateMarks = function(){
-
-};
+// const updateMarks = function(){ /<==extra
+//                                /
+// };                            /
+//______________________________/
 
 const deleteMarks = function(){
 
@@ -40,7 +41,7 @@ const deleteMarks = function(){
 export default{
   getMarks,
   newMarks,
-  updateMarks,
+  //updateMarks, <== extra
   deleteMarks,
 
 };

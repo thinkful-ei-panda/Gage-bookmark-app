@@ -1,0 +1,47 @@
+body{
+    background-color: darkslategrey;
+    justify-content: center;
+}
+
+h1{
+    background-color: #585187 ;
+    border: black solid;
+    border-radius: 8px;
+}
+
+.top-bar{
+    text-align: center;
+    background-color: darkslateblue;
+    color: #d691a2;
+    border: black solid;
+    border-radius: 8px;
+}
+
+.submission-form{
+    text-align: center;
+    background-color: darkslateblue;
+    color: #d691a2;
+    border: black solid;
+    border-radius: 8px;
+}
+
+.small-bookmark{
+    background-color: darkslateblue;
+    color: #d691a2;
+    border: black solid;
+    border-radius: 8px;
+}
+
+.big-bookmark{
+    background-color: darkslateblue;
+    color: #d691a2;
+    border: black solid;
+    font-size: 24px;
+    border-radius: 8px;
+}
+
+.big-bookmark a{
+    background-color: #585187 ;
+    border: black solid;
+    border-radius: 8px;
+}
