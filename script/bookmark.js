@@ -94,6 +94,14 @@ const render = function(){
 //****************and this is where it get's fun (ーー;) ***********************//
 //**************************event listeners ************************************//
 
+const handleAddButton = function(){
+  $('button.add').click((x) => {
+    x.preventDefault();
+    console.log('handleAddButton is working');
+    //cache.submissionBoxLoader = true
+  });
+};
+
 const handleSubmissions = function() {
   $('#main-form-submit').submit( (e) =>{
     e.preventDefault();
@@ -108,11 +116,13 @@ const handleSubmissions = function() {
       desc: newDesc,
       rating: newVal,
     };
+    cache.submissionToggle = false;
     $('#add-bM').reset();
     api.newMarks(o)
       .then((newSub)=>{
         cache.addBookmark(newSub);
         render();
+
       } );
   } );
 };
@@ -146,13 +156,22 @@ const handleMarkExpanded = function(){
     render();
   });
 };
-
+//needs work
 const handleFilterValChange = function(){
-    $('.out-of-filter').change( () =>{
-        const = 
-    } )
+  $('.out-of-filter').change( () =>{
+    cache.ratingFilter = $(this).children('option:selected').val();
+    console.log(cache.ratingFilter);
+    render();
+  } );
+};
 
-}
+const eventPackage = function () {
+  handleAddButton(); 
+  handleSubmissions();
+  handleDeleteMarkClicked();
+  handleMarkExpanded();
+  handleFilterValChange();
+};
 
 
 
@@ -160,5 +179,6 @@ const handleFilterValChange = function(){
 
 
 export default{
-  render,
+  eventPackage,
+  render
 };
