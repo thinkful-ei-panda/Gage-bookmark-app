@@ -11,15 +11,16 @@ const generateBookmarkLoader = function (mark){
   //load with milk 1st
   let displayBox = `<div class="big-bookmark" id="${mark.id}"> 
         <h2>${mark.title}</h2>
-        <button id="deleteMe" type="delete">Delete</button>
+        <p>score : ${mark.rating} out of 5</p>
         <a href="${mark.url}" type="button">visit sight</a>
+        <button id="deleteMe" type="delete">Delete</button>
         <p>${mark.desc}</p>
     </div>`;
   if(!mark.expanded){
     displayBox =`
             <div class="small-bookmark" id="${mark.id}">
                 <span>${mark.title}</span>
-                <span>${mark.rating}/5</span>
+                <span>score :${mark.rating} out of 5 </span>
             </div>`;
   }
   return displayBox; 
@@ -33,6 +34,7 @@ const topBarLoader = function(){
           <form class="filter-selected" action="filter">
               <label for="filter">filter by scores greater then</label>
               <select name="out-of-filter" id="filter">
+                  <option disabled selected>filter by</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -205,7 +207,6 @@ const handleMarkExpanded = function(){
 const handleFilterValChange = function(){
   $('main').on( 'change','#filter', () =>{ 
     let eh = $('#filter').val();
-    $('#filter').val('eh');
     console.log(eh);
     render();
   } );

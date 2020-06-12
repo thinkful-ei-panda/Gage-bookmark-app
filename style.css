@@ -1,19 +1,56 @@
+/* ~~~COLORS~~~  */
+
+/**** Main color (dark gray #37474f )
+        lighter then #62727b
+        darker then #102027
+        font color for ^^^ #ffffff
+        
+        Secondary color (dark moss green #9e9d24 )
+        lighter #d2ce56
+        darker #6c6f00 <<<NOTE(used font #ffffff)
+        font color for ^^^ #000000
+         ***/
+
+/**============font family's =====================**/
+
+
+
 body{
-    background-color: darkslategrey;
+    background-image: url('img/library.jpeg');
     justify-content: center;
+    background-position: center;
 }
 
 h1{
-    background-color: #585187 ;
+    background-color: #102027 ;
+    color: #ffffff;
     border: black solid;
     border-radius: 8px;
     margin: 7px 50px 7px 50px;
 }
 
+button{
+    text-align: center;
+    background-color: #62727b;
+    color: #ffffff;
+    border: black solid;
+    border-radius: 8px;
+}
+
+select{
+    text-align: center;
+    background-color: #62727b;
+    color: #ffffff;
+    border: black solid;
+    border-radius: 8px;
+}
+
+
+
 .top-bar{
     text-align: center;
-    background-color: darkslateblue;
-    color: #d691a2;
+    background-color: #102027;
+    color: #ffffff;
     border: black solid;
     border-radius: 8px;
     margin: 7px 50px 7px 50px;    
@@ -21,24 +58,24 @@ h1{
 
 .submission-form{
     text-align: center;
-    background-color: darkslateblue;
-    color: #d691a2;
+    background-color: #102027;
+    color: #ffffff;
     border: black solid;
     border-radius: 8px;
     margin: 7px 50px 7px 50px;
 }
 
 .small-bookmark{
-    background-color: darkslateblue;
-    color: #d691a2;
+    background-color: #102027;
+    color: #ffffff;
     border: black solid;
     border-radius: 8px;
     margin: 7px 50px 7px 50px;
 }
 
 .big-bookmark{
-    background-color: darkslateblue;
-    color: #d691a2;
+    background-color: #102027;
+    color: #ffffff;
     border: black solid;
     font-size: 24px;
     border-radius: 8px;
@@ -47,7 +84,9 @@ h1{
 
 .big-bookmark a{
     text-decoration: none;
-    background-color: #585187 ;
+    text-align: center;
+    background-color: #62727b;
+    color: #ffffff;
     border: black solid;
     border-radius: 8px;
 }
