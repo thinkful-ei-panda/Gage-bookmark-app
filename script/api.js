@@ -1,6 +1,6 @@
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/gage'; // bookmark
 
-const errorCatch = function(...args){
+const errorCatch = function(...args) {
   let error;
   return fetch(...args)
     .then(res => {
@@ -21,11 +21,19 @@ const errorCatch = function(...args){
 
 
 const getMarks = function(){
-  
+  return errorCatch(`${BASE_URL}/bookmarks`);
 };
 
-const newMarks = function(){
+const newMarks = function(objInput){
+  const newMark = JSON.stringify(objInput);
 
+  return errorCatch(`${BASE_URL}/bookmarks`, {
+    method: 'POST',
+    headers : {
+      'Content-Type' : 'application/json'
+    },
+    body : newMark
+  });
 };
 
 // const updateMarks = function(){ /<==extra
@@ -33,8 +41,10 @@ const newMarks = function(){
 // };                            /
 //______________________________/
 
-const deleteMarks = function(){
-
+const deleteMarks = function(id){
+  return errorCatch(`${BASE_URL}/bookmarks/${id}`,{
+    method : 'DELETE',
+  });
 };
 
 

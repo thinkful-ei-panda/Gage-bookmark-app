@@ -7,12 +7,13 @@ const ratingFilter = 0;
 const submissionToggle = false;
 
 const findById = function (id) {
-  return this.bookmark.find(x => x.id === id);
+  return this.bookmarks.find(x => x.id === id);
 };
 
 const addBookmark = function (obj){
   obj.expanded = false;
-  this.bookmark.push(obj);
+  console.log(obj)
+  this.bookmarks.push(obj);
 };
 //might update to full update... well see 
 const toggleExpand= function(id){
@@ -21,7 +22,7 @@ const toggleExpand= function(id){
 };
 
 const findAndDelete = function (id) {
-  this.bookmark = this.bookmark.filter(x => x.id !== id);
+  this.bookmarks = this.bookmarks.filter(x => x.id !== id);
 };
 
 const setError = function(e){

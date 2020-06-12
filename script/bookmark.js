@@ -120,6 +120,7 @@ const handleSubmissions = function() {
     $('#add-bM').reset();
     api.newMarks(o)
       .then((newSub)=>{
+        console.log(newSub);
         cache.addBookmark(newSub);
         render();
 
@@ -134,7 +135,7 @@ const getBookmarkId = function (mark) {
 };
 
 const handleDeleteMarkClicked = function() {
-  $('.app-loader').on('click', '#deleteMe-OwO', () => {
+  $('.app-loader').on('click', '#deleteMe-OwO', (x) => {
     const id = getBookmarkId(x.currentTarget);
     api.deleteMarks(id)
       .then(() => {
