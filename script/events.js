@@ -1,4 +1,4 @@
-import cache from './cache.js';
+import store from './store.js';
 import api from './api.js';
 
 
@@ -11,7 +11,7 @@ const generateBookmarkLoader = function (mark){
   //load with milk 1st
   let displayBox = `<div class="big-bookmark" id="${mark.id}"> 
         <h2>${mark.title}</h2>
-        <button id="deleteMe-OwO" type="delete">Delete</button>
+        <button id="deleteMe" type="delete">Delete</button>
         <a href="${mark.url}" type="button">visit sight</a>
         <p>${mark.desc}</p>
     </div>`;
@@ -23,6 +23,25 @@ const generateBookmarkLoader = function (mark){
             </div>`;
   }
   return displayBox; 
+};
+
+const topBarLoader = function(){
+  return `
+    <div class="top-bar">
+          <button class="add">Add new item</button>
+
+          <form class="filter-selected" action="filter">
+              <label for="filter">filter by scores greater then</label>
+              <select name="out-of-filter" id="filter">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+              </select>
+          </form>    
+      </div> 
+  `;
 };
 
 const submissionBoxLoader = function(){
@@ -50,16 +69,16 @@ const submissionBoxLoader = function(){
 
 //********error handlers (need to work on )****************//
 
-const errorElement = function (oppsywoopsy) {
+const errorElement = function (error) {
   return `<section class="error-content">
             <button id="cancel-error">X</button>
-            <p>${oppsywoopsy}</p>
+            <p>${error}</p>
         </section>`;
 };
 
 const renderError = function(){
-  if(cache.error) {
-    const Eelem = errorElement(cache.error);
+  if(store.error) {
+    const Eelem = errorElement(store.error);
   }
 };
 
@@ -79,15 +98,20 @@ const render = function(){
 
   //loads submission page if button $('.add') is clicked 
   //console.log('at Render submissionTog should = ',cache.submissionToggle);
-  let marks = [...cache.bookmarks];
-  if(cache.ratingFilter > 0){
-    marks = marks.filter(obj => obj.rating < cache.ratingFilter);
+  let html = '';
+
+  let marks = [...store.bookmarks];
+  if(store.ratingFilter > 0){
+    marks = marks.filter(obj => obj.rating < store.ratingFilter);
   }
-  const htmlArrToString = generateBookmarkList(marks);
+
+  html = topBarLoader();
+
+  html +=  generateBookmarkList(marks);
   
-  $('.app-loader').html(htmlArrToString);
+  $('.app-loader').html(html);
   
-  if(cache.submissionToggle){
+  if(store.submissionToggle){
     $('.app-loader').html(submissionBoxLoader());
   }
 
@@ -97,16 +121,16 @@ const render = function(){
 //**************************event listeners ************************************//
 
 const handleAddButton = function(){
-  $('button.add').click((x) => {
+  $('main').on('click','button.add',(x) => {
     x.preventDefault();
-    cache.submissionToggle = true;
-    console.log(' @ handleAddButton submission =', cache.submissionToggle);
+    store.submissionToggle = true;
+    console.log(' @ handleAddButton submission =', store.submissionToggle);
     render();
   });
 };
 
 const handleSubmissions = function() {
-  $('#main-form-submit').click( (e) =>{
+  $('main').on( 'submit','#add-bM', (e) =>{
     e.preventDefault();
     const newTitle = $('#title-Input').val();
     const newURL = $('#url-input').val();
@@ -119,11 +143,11 @@ const handleSubmissions = function() {
       desc: newDesc,
       rating: newVal,
     };
-    cache.toggleSubmission();
+    store.toggleSubmission();
     api.newMarks(o)
       .then((newSub)=>{
         console.log(newSub);
-        cache.addBookmark(newSub);
+        store.addBookmark(newSub);
         render();
       } );
   } );
@@ -133,12 +157,10 @@ const handleCancelButton = () => {
   $('main').on('click', '#reset',(e) => {
     e.preventDefault();
     console.log('handleCancelButton is working');
-    cache.toggleSubmission();
+    store.toggleSubmission();
     render();
   });
 };
-
-
 
 const getBookmarkId = function (mark) {
   //console.log('at getBookmarkID the inputted element =',mark)
@@ -147,34 +169,44 @@ const getBookmarkId = function (mark) {
 };
 
 const handleDeleteMarkClicked = function() {
-  $('.app-loader').on('click', '#deleteMe-OwO', (x) => {
-    const id = getBookmarkId(x.currentTarget);
+  $('.app-loader').on('click', '#deleteMe', (x) => {
+    const target = $('#deleteMe').parent();
+    const id = getBookmarkId(target);
     api.deleteMarks(id)
       .then(() => {
-        cache.findAndDelete(id);
+        store.findAndDelete(id);
         render();
       })
       .catch((e)=>{
         console.log(e);
-        cache.setError(e.message);
+        store.setError(e.message);
         renderError();
       });
   });
 };
 
+const handleClosingBigDisplay = () => {
+  $('main').on('click','.big-bookmark',(e)=>{
+    const id = getBookmarkId(e.currentTarget);
+    store.toggleExpand(id);
+    render();
+  });
+};
+
 const handleMarkExpanded = function(){
-  $('.app-loader').on('click', '.small-bookmark', (e) => {
+  $('main').on('click', '.small-bookmark', (e) => {
     //console.log('at handleMarkExanded event.target = ', e.currentTarget);
     const id = getBookmarkId(e.currentTarget);
-    cache.toggleExpand(id);
+    store.toggleExpand(id);
     render();
   });
 };
 //needs work
 const handleFilterValChange = function(){
-  $('.out-of-filter').change( () =>{
-    cache.ratingFilter = $(this).children('option:selected').val();
-    console.log(cache.ratingFilter);
+  $('main').on( 'change','#filter', () =>{ 
+    let eh = $('#filter').val();
+    $('#filter').val('eh');
+    console.log(eh);
     render();
   } );
 };
@@ -183,6 +215,7 @@ const eventPackage = function () {
   handleAddButton(); 
   handleSubmissions();
   handleCancelButton();
+  handleClosingBigDisplay();
   handleDeleteMarkClicked();
   handleMarkExpanded();
   handleFilterValChange();
