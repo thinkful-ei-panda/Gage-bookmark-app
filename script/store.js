@@ -8,8 +8,11 @@ const submissionToggle = false;
 
 const findById = function (id) {
   console.log('at findById  id =',id);
-  return bookmarks.find(x => x.id === id);
+  const thing = bookmarks.find(x => x.id === id);
+  console.log(thing);
+  return thing;
 };
+
 
 const toggleSubmission = function(){
   this.submissionToggle = !this.submissionToggle ;
@@ -23,6 +26,7 @@ const addBookmark = function (obj){
 //might update to full update... well see 
 const toggleExpand= function(id){
   const target = this.findById(id);
+  console.log(this);
   target.expanded = !target.expanded;
 };
 
