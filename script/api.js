@@ -26,6 +26,7 @@ const getMarks = function(){
 
 const newMarks = function(objInput){
   const newMark = JSON.stringify(objInput);
+  console.log(newMark);
 
   return errorCatch(`${BASE_URL}/bookmarks`, {
     method: 'POST',

@@ -7,6 +7,7 @@ h1{
     background-color: #585187 ;
     border: black solid;
     border-radius: 8px;
+    margin: 7px 50px 7px 50px;
 }
 
 .top-bar{
@@ -15,6 +16,7 @@ h1{
     color: #d691a2;
     border: black solid;
     border-radius: 8px;
+    margin: 7px 50px 7px 50px;    
 }
 
 .submission-form{
@@ -23,6 +25,7 @@ h1{
     color: #d691a2;
     border: black solid;
     border-radius: 8px;
+    margin: 7px 50px 7px 50px;
 }
 
 .small-bookmark{
@@ -30,6 +33,7 @@ h1{
     color: #d691a2;
     border: black solid;
     border-radius: 8px;
+    margin: 7px 50px 7px 50px;
 }
 
 .big-bookmark{
@@ -38,9 +42,11 @@ h1{
     border: black solid;
     font-size: 24px;
     border-radius: 8px;
+    margin: 7px 50px 7px 50px;
 }
 
 .big-bookmark a{
+    text-decoration: none;
     background-color: #585187 ;
     border: black solid;
     border-radius: 8px;

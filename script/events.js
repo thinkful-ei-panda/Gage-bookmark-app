@@ -9,15 +9,15 @@ import api from './api.js';
 const generateBookmarkLoader = function (mark){
 
   //load with milk 1st
-  let displayBox = `<div class="big-bookmark" data-item-id="${mark.id}"> 
+  let displayBox = `<div class="big-bookmark" id="${mark.id}"> 
         <h2>${mark.title}</h2>
         <button id="deleteMe-OwO" type="delete">Delete</button>
         <a href="${mark.url}" type="button">visit sight</a>
-        <p>${mark.description}</p>
+        <p>${mark.desc}</p>
     </div>`;
   if(!mark.expanded){
     displayBox =`
-            <div class="small-bookmark" data-item-id="${mark.id}">
+            <div class="small-bookmark" id="${mark.id}">
                 <span>${mark.title}</span>
                 <span>${mark.rating}/5</span>
             </div>`;
@@ -50,18 +50,18 @@ const submissionBoxLoader = function(){
 
 //********error handlers (need to work on )****************//
 
-// const errorElement = function (oppsywoopsy) {
-//   return `<section class="error-content">
-//             <button id="cancel-error">X</button>
-//             <p>${oppsywoopsy}</p>
-//         </section>`;
-// };
+const errorElement = function (oppsywoopsy) {
+  return `<section class="error-content">
+            <button id="cancel-error">X</button>
+            <p>${oppsywoopsy}</p>
+        </section>`;
+};
 
-// const renderError = function(){
-//   if(cache.error) {
-//     const Eelem = errorElement(cache.error);
-//   }
-// };
+const renderError = function(){
+  if(cache.error) {
+    const Eelem = errorElement(cache.error);
+  }
+};
 
 //**********print for each**************//
 
@@ -75,20 +75,22 @@ const generateBookmarkList = function(bookmarkList){
 //cuz you know... a render function can't be a render function, unless if it's named render..... 눈_눈
 
 const render = function(){
-  //renderError
+  renderError();
 
   //loads submission page if button $('.add') is clicked 
-  if(cache.submissionToggle){
-    $('.app-loader').html(submissionBoxLoader());
-  }
+  //console.log('at Render submissionTog should = ',cache.submissionToggle);
   let marks = [...cache.bookmarks];
   if(cache.ratingFilter > 0){
     marks = marks.filter(obj => obj.rating < cache.ratingFilter);
   }
-
   const htmlArrToString = generateBookmarkList(marks);
-
+  
   $('.app-loader').html(htmlArrToString);
+  
+  if(cache.submissionToggle){
+    $('.app-loader').html(submissionBoxLoader());
+  }
+
 };
 
 //****************and this is where it get's fun (ーー;) ***********************//
@@ -97,13 +99,14 @@ const render = function(){
 const handleAddButton = function(){
   $('button.add').click((x) => {
     x.preventDefault();
-    console.log('handleAddButton is working');
-    //cache.submissionBoxLoader = true
+    cache.submissionToggle = true;
+    console.log(' @ handleAddButton submission =', cache.submissionToggle);
+    render();
   });
 };
 
 const handleSubmissions = function() {
-  $('#main-form-submit').submit( (e) =>{
+  $('#main-form-submit').click( (e) =>{
     e.preventDefault();
     const newTitle = $('#title-Input').val();
     const newURL = $('#url-input').val();
@@ -116,22 +119,31 @@ const handleSubmissions = function() {
       desc: newDesc,
       rating: newVal,
     };
-    cache.submissionToggle = false;
-    $('#add-bM').reset();
+    cache.toggleSubmission();
     api.newMarks(o)
       .then((newSub)=>{
         console.log(newSub);
         cache.addBookmark(newSub);
         render();
-
       } );
   } );
 };
 
+const handleCancelButton = () => {
+  $('main').on('click', '#reset',(e) => {
+    e.preventDefault();
+    console.log('handleCancelButton is working');
+    cache.toggleSubmission();
+    render();
+  });
+};
+
+
+
 const getBookmarkId = function (mark) {
-  return $(mark)
-    .closest('.big-bookmark')
-    .data('mark-id');
+  //console.log('at getBookmarkID the inputted element =',mark)
+  const id = $(mark).attr('id');
+  return id; 
 };
 
 const handleDeleteMarkClicked = function() {
@@ -145,13 +157,14 @@ const handleDeleteMarkClicked = function() {
       .catch((e)=>{
         console.log(e);
         cache.setError(e.message);
-        //renderError();
+        renderError();
       });
   });
 };
 
 const handleMarkExpanded = function(){
   $('.app-loader').on('click', '.small-bookmark', (e) => {
+    //console.log('at handleMarkExanded event.target = ', e.currentTarget);
     const id = getBookmarkId(e.currentTarget);
     cache.toggleExpand(id);
     render();
@@ -169,6 +182,7 @@ const handleFilterValChange = function(){
 const eventPackage = function () {
   handleAddButton(); 
   handleSubmissions();
+  handleCancelButton();
   handleDeleteMarkClicked();
   handleMarkExpanded();
   handleFilterValChange();

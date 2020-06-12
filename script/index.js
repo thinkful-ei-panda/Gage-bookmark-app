@@ -1,6 +1,6 @@
 import api from './api.js';
 import cache from './cache.js';
-import bookmark from './bookmark.js';
+import events from './events.js';
 
 
 
@@ -10,10 +10,10 @@ const main = function(){
   api.getMarks()
     .then((marks) => {
       marks.forEach(bM => cache.addBookmark(bM));
-      bookmark.render();
+      events.render();
     });
-  bookmark.eventPackage();
-  bookmark.render();
+  events.eventPackage();
+  events.render();
 };
 
 $(main);

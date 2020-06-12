@@ -7,12 +7,17 @@ const ratingFilter = 0;
 const submissionToggle = false;
 
 const findById = function (id) {
-  return this.bookmarks.find(x => x.id === id);
+  console.log('at findById  id =',id);
+  return bookmarks.find(x => x.id === id);
 };
+
+const toggleSubmission = function(){
+  this.submissionToggle = !this.submissionToggle ;
+} ;
 
 const addBookmark = function (obj){
   obj.expanded = false;
-  console.log(obj)
+  console.log(obj);
   this.bookmarks.push(obj);
 };
 //might update to full update... well see 
@@ -37,6 +42,7 @@ export default {
   findById,
   addBookmark,
   toggleExpand,
+  toggleSubmission,
   findAndDelete,
   setError,
 };
