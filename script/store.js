@@ -30,11 +30,11 @@ const toggleExpand= function(id){
   target.expanded = !target.expanded;
 };
 
-const findAndDelete = function (id) {
-  console.log('@ findAndDelete id =', id);
-  this.bookmarks = this.bookmarks.filter(x => x.id !== id);
-  console.log('@ findAndDelete bookmarks =',this.bookmarks);
+const findAndDelete = function (id)  {
+  const index = this.bookmarks.findIndex( x => x.id === id);
+  this.bookmarks.splice(index,1);
 };
+
 
 const setError = function(e){
   this.error = e; 

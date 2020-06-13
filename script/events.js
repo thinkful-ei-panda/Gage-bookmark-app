@@ -87,8 +87,8 @@ const renderError = function(){
 //**********print for each**************//
 
 const generateBookmarkList = function(bookmarkList){
-  const bookmarks = bookmarkList.map( (object) => generateBookmarkLoader(object));
-  return bookmarks.join('\n');
+  const bookmarks = bookmarkList.map( (object) =>  generateBookmarkLoader(object));
+  return bookmarks.join('');
 };
 
 
@@ -174,6 +174,7 @@ const handleDeleteMarkClicked = function() {
     x.preventDefault();
     const target = $('#deleteMe').parent();
     const id = getBookmarkId(target);
+    console.log('@ handledDeleteMArkClicked id =',id)
     $('main').remove(`div#${id}`);
     api.deleteMarks(id)
       .then(() => {
