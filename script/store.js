@@ -8,6 +8,7 @@ const submissionToggle = false;
 
 const findById = function (id) {
   console.log('at findById  id =',id);
+  console.log(bookmarks);
   const thing = bookmarks.find(x => x.id === id);
   console.log(thing);
   return thing;
@@ -20,18 +21,17 @@ const toggleSubmission = function(){
 
 const addBookmark = function (obj){
   obj.expanded = false;
-  console.log(obj);
+  console.log('@ addBookmark obj =',obj);
   this.bookmarks.push(obj);
 };
 //might update to full update... well see 
 const toggleExpand= function(id){
   const target = this.findById(id);
-  console.log(this);
   target.expanded = !target.expanded;
 };
 
 const findAndDelete = function (id) {
-  this.bookmarks = this.bookmarks.filter(x => x.id !== id);
+  this.bookmarks = bookmarks.filter(x => x.id !== id);
 };
 
 const setError = function(e){

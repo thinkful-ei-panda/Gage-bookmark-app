@@ -104,7 +104,7 @@ const render = function(){
 
   let marks = [...store.bookmarks];
   if(store.ratingFilter > 0){
-    marks = marks.filter(obj => obj.rating < store.ratingFilter);
+    marks = marks.filter(obj => obj.rating >= store.ratingFilter);
   }
 
   html = topBarLoader();
@@ -165,7 +165,7 @@ const handleCancelButton = () => {
 };
 
 const getBookmarkId = function (mark) {
-  //console.log('at getBookmarkID the inputted element =',mark)
+  console.log('at getBookmarkID the inputted element =',mark)
   const id = $(mark).attr('id');
   return id; 
 };
@@ -174,6 +174,7 @@ const handleDeleteMarkClicked = function() {
   $('.app-loader').on('click', '#deleteMe', (x) => {
     const target = $('#deleteMe').parent();
     const id = getBookmarkId(target);
+    $('main').remove(`div#${id}`);
     api.deleteMarks(id)
       .then(() => {
         store.findAndDelete(id);
@@ -206,8 +207,8 @@ const handleMarkExpanded = function(){
 //needs work
 const handleFilterValChange = function(){
   $('main').on( 'change','#filter', () =>{ 
-    let eh = $('#filter').val();
-    console.log(eh);
+    store.ratingFilter = $('#filter').val();
+    console.log(store.ratingFilter);
     render();
   } );
 };
