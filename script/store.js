@@ -1,6 +1,6 @@
 const error = null ;
 
-const bookmarks = [];
+let bookmarks = [];
 
 const ratingFilter = 0;
 
@@ -31,7 +31,9 @@ const toggleExpand= function(id){
 };
 
 const findAndDelete = function (id) {
-  this.bookmarks = bookmarks.filter(x => x.id !== id);
+  console.log('@ findAndDelete id =', id);
+  this.bookmarks = this.bookmarks.filter(x => x.id !== id);
+  console.log('@ findAndDelete bookmarks =',this.bookmarks);
 };
 
 const setError = function(e){

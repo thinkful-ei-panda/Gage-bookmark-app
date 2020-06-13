@@ -55,7 +55,7 @@ const submissionBoxLoader = function(){
             <label for="url-input">add url for bookmark</label>
                 <input type="url" name="url"  id="url-input" placeholder="coolmathgames.com" required>
             <label for="bookmark-description">description</label>
-                <textarea name="desc" id="bookmark-description"  required>its a cool place to play cool games</textarea>
+                <textarea name="desc" id="bookmark-description" required>its a cool place to play cool games</textarea>
                 <select name="out-of-filter" id="rank">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -102,7 +102,7 @@ const render = function(){
   //console.log('at Render submissionTog should = ',cache.submissionToggle);
   let html = '';
 
-  let marks = [...store.bookmarks];
+  let marks = store.bookmarks;
   if(store.ratingFilter > 0){
     marks = marks.filter(obj => obj.rating >= store.ratingFilter);
   }
@@ -148,7 +148,6 @@ const handleSubmissions = function() {
     store.toggleSubmission();
     api.newMarks(o)
       .then((newSub)=>{
-        console.log(newSub);
         store.addBookmark(newSub);
         render();
       } );
@@ -172,6 +171,7 @@ const getBookmarkId = function (mark) {
 
 const handleDeleteMarkClicked = function() {
   $('.app-loader').on('click', '#deleteMe', (x) => {
+    x.preventDefault();
     const target = $('#deleteMe').parent();
     const id = getBookmarkId(target);
     $('main').remove(`div#${id}`);
