@@ -41,6 +41,7 @@ export default {
   bookmarks,
   ratingFilter,
   submissionToggle,
+  error,
   findById,
   addBookmark,
   toggleExpand,

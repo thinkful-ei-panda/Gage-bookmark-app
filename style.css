@@ -16,6 +16,8 @@
 /**  header font>  font-family: 'Goudy Bookletter 1911', serif;===**/                                
 /**===============================================================**/
 
+
+
 body{
     background-image: url('img/library.jpeg');
     justify-content: center;
@@ -34,20 +36,23 @@ h1{
 
 main{
     font-family: 'Baloo 2', cursive;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 button{
     text-align: center;
-    background-color: #62727b;
-    color: #ffffff;
+    background-color: #d2ce56 ;
+    color: #000000;
     border: black solid;
     border-radius: 8px;
 }
 
 select{
     text-align: center;
-    background-color: #62727b;
-    color: #ffffff;
+    background-color: #d2ce56 ;
+    color: #000000;
     border: black solid;
     border-radius: 8px;
 }
@@ -71,6 +76,19 @@ select{
     border: black solid;
     border-radius: 8px;
     margin: 7px 50px 7px 50px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 350px;
+}
+
+#bookmark-description{
+    height: 150px;
+    width: auto;
+    border: black solid;
+    border-radius: 8px;
+    font-family: 'Baloo 2', cursive;
 }
 
 .small-bookmark{
@@ -95,6 +113,11 @@ h2{
     font-size: 24px;
 }
 
+input{
+    border-radius: 4px;
+    border: black solid; 
+}
+
 .big-b-button{
     align-self: flex-end;
     margin: 5px;
@@ -103,8 +126,61 @@ h2{
 .big-bookmark a{
     text-decoration: none;
     text-align: center;
-    background-color: #62727b;
-    color: #ffffff;
+    background-color: #d2ce56 ;
+    color: #000000;
     border: black solid;
     border-radius: 8px;
 }
+
+.error-content{
+    background: crimson;
+    border: black solid;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 8px;
+    margin: 8px;
+}
+
+#cancel-error{
+    height: 40px;
+    width: 40px;
+    background: darkred;
+    margin: 10px;
+}
+
+.form-div{
+    flex-direction: column;
+    display: flex;
+    align-items: baseline;
+}
+
+.clip-star {
+    background: gold;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+  }
+
+
+
+  @media all and ( min-width: 850px){
+        .top-bar{
+            margin: 10px 100px 10px 100px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .big-bookmark{
+          margin: 10px 100px 10px 100px;
+        }
+        .small-bookmark{
+          margin: 10px 100px 10px 100px;  
+        }
+        .submission-form{
+            width: 400px;
+        }
+        h1{
+            margin: 10px 100px 10px 100px;  
+        }
+  }

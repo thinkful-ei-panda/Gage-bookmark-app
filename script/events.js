@@ -8,12 +8,18 @@ import api from './api.js';
 //***TODO add delete button to big-bookmarks ***//
 const generateBookmarkLoader = function (mark){
 
+  const star = '<div class="clip-star"></div>';
+  let starStore = [];
+  for (let i = 0; i < mark.rating; i++) {
+    starStore.push(star);
+  }
+  starStore = starStore.join('\n')
   //load with milk 1st
-  let displayBox = `<div class="big-bookmark" id="${mark.id}"> 
+  let displayBox = `<div class="big-bookmark" id="${mark.id}" > 
         <h2>${mark.title}</h2>
-        <p>score : ${mark.rating} out of 5</p>
+        <p>score : ${starStore}</p>
         <p>${mark.desc}</p>
-        <div class="big-b-button" >
+        <div class="big-b-button" id="${mark.id}" >
           <a href="${mark.url}" type="button" target="_blank" >visit sight</a>
           <button id="deleteMe" type="delete">Delete</button>
         </div>
@@ -23,7 +29,9 @@ const generateBookmarkLoader = function (mark){
     displayBox =`
             <div class="small-bookmark" id="${mark.id}">
                 <span>${mark.title}</span>
-                <span>score :${mark.rating} out of 5 </span>
+                <div>
+                score : ${starStore}
+                </div>
             </div>`;
   }
   return displayBox; 
@@ -52,22 +60,32 @@ const topBarLoader = function(){
 const submissionBoxLoader = function(){
   return `
    <div class="submission-form">
-        <form class="add-bookmark" id="add-bM" action="submit">
-            <label for="title-Input">add new bookmark</label>
-                <input type="text" name="title" id="title-Input" placeholder="coolmathgames" required>
-            <label for="url-input">add url for bookmark</label>
-                <input type="url" name="url"  id="url-input" placeholder="coolmathgames.com" required>
-            <label for="bookmark-description">description</label>
-                <textarea name="desc" id="bookmark-description" required>its a cool place to play cool games</textarea>
-                <select name="out-of-filter" id="rank">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                <button type="submit" id="main-form-submit">Create</button>
-                <button type="reset" id="reset">Cancel</button>
+      <form class="add-bookmark" id="add-bM" action="submit">
+    <div class ="form-div"> 
+      <label for="title-Input">add new bookmark</label>
+        <input type="text" name="title" id="title-Input" placeholder="new Bookmark" required>
+    </div >
+    <div class ="form-div"> 
+      <label for="url-input">add url for bookmark</label>
+        <input type="url" name="url"  id="url-input" placeholder="BookMarksApp.com" required>
+    </div >
+    <div class ="form-div"> 
+      <label for="bookmark-description">description</label>
+        <textarea name="desc" id="bookmark-description" placeholder="what would you like to say about the new Bookmark"></textarea>
+    </div>
+    <div class="submit buttons">
+      <label for= "rank">score</label>
+      <select name="out-of-filter" id="rank">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+      </select>
+      <button type="submit" id="main-form-submit">Create</button>
+      <button type="reset" id="reset">Cancel</button>
+    </div>
+                
         </form>
     </div>`;
 };
@@ -90,7 +108,8 @@ const renderError = function(){
 
 const errorButton = function(){
   $('.app-loader').on('click','#cancel-error',()=>{
-    store.setError()
+    store.setError();
+    render();
   });
 };
 
@@ -181,8 +200,9 @@ const handleDeleteMarkClicked = function() {
   $('.app-loader').on('click', '#deleteMe', (x) => {
     x.preventDefault();
     const target = $('#deleteMe').parent();
+    console.log('@ handleDeletemarkclicker target =',target);
     const id = getBookmarkId(target);
-    $('main').remove(`div#${id}`);
+    console.log('@ handleDeletemarkclicker id =',id);
     api.deleteMarks(id)
       .then(() => {
         store.findAndDelete(id);

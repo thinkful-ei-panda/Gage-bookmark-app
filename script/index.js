@@ -11,6 +11,11 @@ const main = function(){
     .then((marks) => {
       marks.forEach(bM => store.addBookmark(bM));
       events.render();
+    })
+    .catch(e => {
+      console.log(e);
+      store.error = e.message; 
+      events.render();
     });
   events.eventPackage();
   events.render();
