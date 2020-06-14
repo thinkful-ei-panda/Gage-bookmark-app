@@ -12,9 +12,12 @@ const generateBookmarkLoader = function (mark){
   let displayBox = `<div class="big-bookmark" id="${mark.id}"> 
         <h2>${mark.title}</h2>
         <p>score : ${mark.rating} out of 5</p>
-        <a href="${mark.url}" type="button">visit sight</a>
-        <button id="deleteMe" type="delete">Delete</button>
         <p>${mark.desc}</p>
+        <div class="big-b-button" >
+          <a href="${mark.url}" type="button" target="_blank" >visit sight</a>
+          <button id="deleteMe" type="delete">Delete</button>
+        </div>
+        
     </div>`;
   if(!mark.expanded){
     displayBox =`
@@ -81,7 +84,14 @@ const errorElement = function (error) {
 const renderError = function(){
   if(store.error) {
     const Eelem = errorElement(store.error);
+    $('.app-loader').html(Eelem);
   }
+};
+
+const errorButton = function(){
+  $('.app-loader').on('click','#cancel-error',()=>{
+    store.setError()
+  });
 };
 
 //**********print for each**************//
@@ -97,11 +107,7 @@ const generateBookmarkList = function(bookmarkList){
 
 const render = function(){
   renderError();
-
-  //loads submission page if button $('.add') is clicked 
-  //console.log('at Render submissionTog should = ',cache.submissionToggle);
   let html = '';
-
   let marks = store.bookmarks;
   if(store.ratingFilter > 0){
     marks = marks.filter(obj => obj.rating >= store.ratingFilter);
@@ -126,7 +132,6 @@ const handleAddButton = function(){
   $('main').on('click','button.add',(x) => {
     x.preventDefault();
     store.submissionToggle = true;
-    console.log(' @ handleAddButton submission =', store.submissionToggle);
     render();
   });
 };
@@ -150,21 +155,24 @@ const handleSubmissions = function() {
       .then((newSub)=>{
         store.addBookmark(newSub);
         render();
-      } );
+      } )
+      .catch((e) => {
+        console.log(e);
+        store.setError(e.message);
+        renderError();
+      });
   } );
 };
 
 const handleCancelButton = () => {
   $('main').on('click', '#reset',(e) => {
     e.preventDefault();
-    console.log('handleCancelButton is working');
     store.toggleSubmission();
     render();
   });
 };
 
 const getBookmarkId = function (mark) {
-  console.log('at getBookmarkID the inputted element =',mark)
   const id = $(mark).attr('id');
   return id; 
 };
@@ -174,7 +182,6 @@ const handleDeleteMarkClicked = function() {
     x.preventDefault();
     const target = $('#deleteMe').parent();
     const id = getBookmarkId(target);
-    console.log('@ handledDeleteMArkClicked id =',id)
     $('main').remove(`div#${id}`);
     api.deleteMarks(id)
       .then(() => {
@@ -209,7 +216,6 @@ const handleMarkExpanded = function(){
 const handleFilterValChange = function(){
   $('main').on( 'change','#filter', () =>{ 
     store.ratingFilter = $('#filter').val();
-    console.log(store.ratingFilter);
     render();
   } );
 };
@@ -222,6 +228,7 @@ const eventPackage = function () {
   handleDeleteMarkClicked();
   handleMarkExpanded();
   handleFilterValChange();
+  errorButton();
 };
 
 

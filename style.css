@@ -11,9 +11,10 @@
         font color for ^^^ #000000
          ***/
 
-/**============font family's =====================**/
-
-
+/**===================font family's ==============================**/
+/** for normale text>    font-family: 'Baloo 2', cursive;  ====== **/
+/**  header font>  font-family: 'Goudy Bookletter 1911', serif;===**/                                
+/**===============================================================**/
 
 body{
     background-image: url('img/library.jpeg');
@@ -23,10 +24,16 @@ body{
 
 h1{
     background-color: #102027 ;
+    font-family: 'Goudy Bookletter 1911', serif;
     color: #ffffff;
     border: black solid;
     border-radius: 8px;
     margin: 7px 50px 7px 50px;
+    padding: 5px 4px 0 5px;
+}
+
+main{
+    font-family: 'Baloo 2', cursive;
 }
 
 button{
@@ -54,6 +61,7 @@ select{
     border: black solid;
     border-radius: 8px;
     margin: 7px 50px 7px 50px;    
+    padding: 7px;
 }
 
 .submission-form{
@@ -71,15 +79,25 @@ select{
     border: black solid;
     border-radius: 8px;
     margin: 7px 50px 7px 50px;
+    padding: 8px 2px 4px 4px;
 }
 
 .big-bookmark{
     background-color: #102027;
     color: #ffffff;
     border: black solid;
-    font-size: 24px;
+    font-size: 18px;
     border-radius: 8px;
     margin: 7px 50px 7px 50px;
+}
+
+h2{
+    font-size: 24px;
+}
+
+.big-b-button{
+    align-self: flex-end;
+    margin: 5px;
 }
 
 .big-bookmark a{

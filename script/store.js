@@ -7,10 +7,7 @@ const ratingFilter = 0;
 const submissionToggle = false;
 
 const findById = function (id) {
-  console.log('at findById  id =',id);
-  console.log(bookmarks);
   const thing = bookmarks.find(x => x.id === id);
-  console.log(thing);
   return thing;
 };
 
@@ -21,7 +18,6 @@ const toggleSubmission = function(){
 
 const addBookmark = function (obj){
   obj.expanded = false;
-  console.log('@ addBookmark obj =',obj);
   this.bookmarks.push(obj);
 };
 //might update to full update... well see 
