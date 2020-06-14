@@ -1,47 +1,186 @@
+/* ~~~COLORS~~~  */
+
+/**** Main color (dark gray #37474f )
+        lighter then #62727b
+        darker then #102027
+        font color for ^^^ #ffffff
+        
+        Secondary color (dark moss green #9e9d24 )
+        lighter #d2ce56
+        darker #6c6f00 <<<NOTE(used font #ffffff)
+        font color for ^^^ #000000
+         ***/
+
+/**===================font family's ==============================**/
+/** for normale text>    font-family: 'Baloo 2', cursive;  ====== **/
+/**  header font>  font-family: 'Goudy Bookletter 1911', serif;===**/                                
+/**===============================================================**/
+
+
+
 body{
-    background-color: darkslategrey;
+    background-image: url('img/library.jpeg');
     justify-content: center;
+    background-position: center;
 }
 
 h1{
-    background-color: #585187 ;
+    background-color: #102027 ;
+    font-family: 'Goudy Bookletter 1911', serif;
+    color: #ffffff;
+    border: black solid;
+    border-radius: 8px;
+    margin: 7px 50px 7px 50px;
+    padding: 5px 4px 0 5px;
+}
+
+main{
+    font-family: 'Baloo 2', cursive;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+button{
+    text-align: center;
+    background-color: #d2ce56 ;
+    color: #000000;
     border: black solid;
     border-radius: 8px;
 }
 
-.top-bar{
+select{
     text-align: center;
-    background-color: darkslateblue;
-    color: #d691a2;
+    background-color: #d2ce56 ;
+    color: #000000;
     border: black solid;
     border-radius: 8px;
+}
+
+
+
+.top-bar{
+    text-align: center;
+    background-color: #102027;
+    color: #ffffff;
+    border: black solid;
+    border-radius: 8px;
+    margin: 7px 50px 7px 50px;    
+    padding: 7px;
 }
 
 .submission-form{
     text-align: center;
-    background-color: darkslateblue;
-    color: #d691a2;
+    background-color: #102027;
+    color: #ffffff;
     border: black solid;
     border-radius: 8px;
+    margin: 7px 50px 7px 50px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 350px;
+}
+
+#bookmark-description{
+    height: 150px;
+    width: auto;
+    border: black solid;
+    border-radius: 8px;
+    font-family: 'Baloo 2', cursive;
 }
 
 .small-bookmark{
-    background-color: darkslateblue;
-    color: #d691a2;
+    background-color: #102027;
+    color: #ffffff;
     border: black solid;
     border-radius: 8px;
+    margin: 7px 50px 7px 50px;
+    padding: 8px 2px 4px 4px;
 }
 
 .big-bookmark{
-    background-color: darkslateblue;
-    color: #d691a2;
+    background-color: #102027;
+    color: #ffffff;
     border: black solid;
-    font-size: 24px;
+    font-size: 18px;
     border-radius: 8px;
+    margin: 7px 50px 7px 50px;
+}
+
+h2{
+    font-size: 24px;
+}
+
+input{
+    border-radius: 4px;
+    border: black solid; 
+}
+
+.big-b-button{
+    align-self: flex-end;
+    margin: 5px;
 }
 
 .big-bookmark a{
-    background-color: #585187 ;
+    text-decoration: none;
+    text-align: center;
+    background-color: #d2ce56 ;
+    color: #000000;
     border: black solid;
     border-radius: 8px;
 }
+
+.error-content{
+    background: crimson;
+    border: black solid;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 8px;
+    margin: 8px;
+}
+
+#cancel-error{
+    height: 40px;
+    width: 40px;
+    background: darkred;
+    margin: 10px;
+}
+
+.form-div{
+    flex-direction: column;
+    display: flex;
+    align-items: baseline;
+}
+
+.clip-star {
+    background: gold;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+  }
+
+
+
+  @media all and ( min-width: 850px){
+        .top-bar{
+            margin: 10px 100px 10px 100px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .big-bookmark{
+          margin: 10px 100px 10px 100px;
+        }
+        .small-bookmark{
+          margin: 10px 100px 10px 100px;  
+        }
+        .submission-form{
+            width: 400px;
+        }
+        h1{
+            margin: 10px 100px 10px 100px;  
+        }
+  }
