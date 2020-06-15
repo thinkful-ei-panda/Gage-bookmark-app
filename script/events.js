@@ -20,7 +20,7 @@ const generateBookmarkLoader = function (mark){
         <p>score : ${starStore}</p>
         <p>${mark.desc}</p>
         <div class="big-b-button" id="${mark.id}" >
-          <a href="${mark.url}" type="button" target="_blank" >visit sight</a>
+          <a href="${mark.url}" type="button" target="_blank" >visit site</a>
           <button id="deleteMe" type="delete">Delete</button>
         </div>
         
@@ -67,7 +67,7 @@ const submissionBoxLoader = function(){
     </div >
     <div class ="form-div"> 
       <label for="url-input">add url for bookmark</label>
-        <input type="url" name="url"  id="url-input" placeholder="BookMarksApp.com" required>
+        <input type="url" name="url"  id="url-input" placeholder="BookMarksApp.com" required oninvalid="this.setCustomValidity('Please Enter a URL with http(s)://')">
     </div >
     <div class ="form-div"> 
       <label for="bookmark-description">description</label>
