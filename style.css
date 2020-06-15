@@ -125,12 +125,24 @@ input{
 
 .big-bookmark a{
     text-decoration: none;
-    text-align: center;
+    
     background-color: #d2ce56 ;
     color: #000000;
     border: black solid;
     border-radius: 8px;
+    height: 30px;
+    width: 60px;
 }
+
+button#deleteMe{
+    text-align: center;
+    height: 35px;
+    width: 60px; 
+}
+
+
+
+
 
 .error-content{
     background: crimson;
