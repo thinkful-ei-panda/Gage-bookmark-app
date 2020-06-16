@@ -178,21 +178,28 @@ button#deleteMe{
 
 
   @media all and ( min-width: 850px){
+
+        main{
+            align-items: center;
+        }
         .top-bar{
             margin: 10px 100px 10px 100px;
             display: flex;
             justify-content: space-around;
+            width: 600px;
         }
         .big-bookmark{
           margin: 10px 100px 10px 100px;
+          width: 600px;
         }
         .small-bookmark{
-          margin: 10px 100px 10px 100px;  
+          margin: 10px 100px 10px 100px;
+          width: 600px; 
         }
         .submission-form{
-            width: 400px;
+            width: 600px;
         }
         h1{
-            margin: 10px 100px 10px 100px;  
+            margin: 10px 100px 10px 100px; 
         }
   }
